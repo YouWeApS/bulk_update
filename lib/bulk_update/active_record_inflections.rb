@@ -18,7 +18,7 @@ module BulkUpdate
 
 
     def insert_str(element)
-      if element.class == Fixnum || element.class == Float
+      if element.class == Integer || element.class == Float
         element
       elsif element.class == NilClass
         'NULL'
