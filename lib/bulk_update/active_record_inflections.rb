@@ -26,7 +26,7 @@ module BulkUpdate
         if element.to_s[0] == '(' || element.to_s.downcase == 'true' || element.to_s.downcase == 'false'
           element.to_s
         else
-          "'#{element}'"
+          ActiveRecord::Base.connection.quote element.to_s
         end
       end
     end
