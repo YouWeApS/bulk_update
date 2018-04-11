@@ -101,7 +101,7 @@ module BulkUpdate
       create(get_new_records for: self, compare_with: temp_table, on: key, condition: condition, exclude_fields: exclude_fields) if insert
       if update
         get_updated_records(for: self, compare_with: temp_table, on: key, condition: condition, exclude_virtual: args[:exclude_virtual], exclude_fields: exclude_fields).each do |id, new_attributes|
-          find(id).update_attributes new_attributes
+          find(id).update_attributes new_attributes.delete_if { |k, v| v.nil? }
         end
       end
       destroy(get_deleted_records for: self, compare_with: temp_table, on: key, condition: condition, exclude_virtual: args[:exclude_virtual]) if remove
